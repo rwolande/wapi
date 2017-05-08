@@ -6,7 +6,7 @@ from flask_restful import Resource, Api, reqparse, HTTPException
 from flask_mysqldb import MySQL
 from _mysql_exceptions import IntegrityError
 
-from controllers.base import BaseController
+from api.controllers.base import BaseController
 
 import jwt
 import bcrypt
