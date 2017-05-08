@@ -14,6 +14,8 @@ sudo apt-get install libapache2-mod-wsgi
 sudo apt-get install python-pip
 sudo pip install flask
 
+sudo mkdir /var/www/html/flask_app
+sudo mkdir /var/www/html/flask_app/wapi
 sudo ln -sT ~/flask_app/wapi /var/www/html/flask_app/wapi
 
 echo "Hello World" > ~/flask_app/wapi/index.html
