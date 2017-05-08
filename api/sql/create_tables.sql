@@ -3,16 +3,17 @@ CREATE TABLE user (
   username varchar(255) NOT NULL,
   phone_number varchar(255) NOT NULL,
   password varchar(255) NOT NULL,
-  last_login_at datetime NOT NULL,
-  image_source varchar(255) NOT NULL,
+  last_login_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  image_source varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (id),
   UNIQUE KEY phone_number (phone_number)
 );
 
 CREATE TABLE squad (
   id int(11) NOT NULL AUTO_INCREMENT,
-  start_image_source varchar(255) NOT NULL,
-  current_image_source varchar(255) NOT NULL,
+  name varchar(255)  NOT NULL DEFAULT '',
+  start_image_source varchar(255) NOT NULL DEFAULT '',
+  current_image_source varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (id)
 );
 
