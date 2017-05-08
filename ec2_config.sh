@@ -10,9 +10,14 @@
 sudo apt-get update
 sudo apt-get install apache2
 sudo apt-get install libapache2-mod-wsgi
-
 sudo apt-get install python-pip
-sudo pip install flask
+#sudo apt-get install libmysqlclient-dev
+#sudo -H pip install -U setuptools
+
+#sudo pip install flask
+#sudo pip install flask_restful
+#sudo pip install flask_mysqldb
+#sudo pip install jwt
 
 sudo mkdir /var/www/html/flask_app
 sudo mkdir /var/www/html/flask_app/wapi
