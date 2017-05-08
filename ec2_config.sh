@@ -11,8 +11,8 @@ sudo apt-get update
 sudo apt-get install apache2
 sudo apt-get install libapache2-mod-wsgi
 sudo apt-get install python-pip
-#sudo apt-get install libmysqlclient-dev
-#sudo -H pip install -U setuptools
+sudo apt-get install libmysqlclient-dev
+sudo -H pip install -U setuptools
 
 #sudo pip install flask
 #sudo pip install flask_restful
