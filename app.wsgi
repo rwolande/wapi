@@ -1,4 +1,4 @@
 import sys
-sys.path.insert(0, '/var/www/html/flask_app/wapi')
+sys.path.insert(0, '/var/www/html/flask_app')
 
-from api import app as application
+from api import api as application
