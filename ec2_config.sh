@@ -10,6 +10,6 @@ sudo pip install flask
 mkdir ~/flask_app
 cd ~/flask_app
 git clone https://github.com/rwolande/api
-sudo ln -sT ~/flask_app/api /var/www/html/flask_app/api
+sudo ln -sT ~/flask_app/wapi /var/www/html/flask_app/wapi
 
-echo "Hello World" > ~/flask_app/index.html
+echo "Hello World" > ~/flask_app/wapi/index.html
