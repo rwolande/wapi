@@ -11,8 +11,8 @@ from api.controllers.base import BaseController
 import jwt
 import bcrypt
 
-import constants
-from status_codes import Status
+from api import constants
+from api import status_codes as Status
 
 def check_params_type(params):
 	"""Raises an exception if passed something besides a tuple"""

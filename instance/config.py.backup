@@ -1,0 +1,9 @@
+BRANCH_ENV = 'local'
+
+MYSQL_DB = 'squid' #
+MYSQL_HOST = 'localhost'
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = '_sw_aa_gT_9'
+
+JWT_KEY = '' #
+LOG_DIR = '~/dev/api/log/squid' #change this to where you want to store logs

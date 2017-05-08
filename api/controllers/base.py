@@ -1,7 +1,7 @@
 from flask import Flask, current_app, request, jsonify
 from flask_restful import Resource
 
-from status_codes import Status
+from api import status_codes as Status
 
 class BaseController(Resource):
 

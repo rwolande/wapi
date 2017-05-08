@@ -9,8 +9,8 @@ from flask import g
 
 #import db_query_select, db_query_update
 from api.controllers.base import BaseController
-import constants
-from status_codes import Status
+from api import constants
+from api import status_codes as Status
 from api.controllers import db_query_select
 
 class UserController(BaseController):
