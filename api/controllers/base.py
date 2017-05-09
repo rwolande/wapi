@@ -10,7 +10,6 @@ class BaseController(Resource):
 		self.app = current_app
 
 	def success_response(self, params={}):
-		params['data'] = params
 		params['status'] = Status.SUCCESS.code
 		return jsonify(params)
 
