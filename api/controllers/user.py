@@ -10,7 +10,7 @@ from flask import g
 #import db_query_select, db_query_update
 from api.controllers.base import BaseController
 from api import constants
-from api import status_codes
+from api.status_codes import Status
 from api.controllers import db_query_select
 
 class UserController(BaseController):
@@ -30,7 +30,7 @@ class UserController(BaseController):
 		res = db_query_select(sql,params)
 
 		if len(res) == 0:
-			return super(UserController,self).error_response(status_codes.MISSING_PARAMETERS)
+			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
 
 		user = res[0]
 		return super(UserController,self).success_response({'user':user})

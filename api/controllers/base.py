@@ -1,7 +1,7 @@
 from flask import Flask, current_app, request, jsonify
 from flask_restful import Resource
 
-from api import status_codes
+from api.status_codes import Status
 
 class BaseController(Resource):
 
@@ -11,7 +11,7 @@ class BaseController(Resource):
 
 	def success_response(self, params={}):
 		params['data'] = params
-		params['status'] = status_codes.SUCCESS.code
+		params['status'] = Status.SUCCESS.code
 		return jsonify(params)
 
 	def error_response(self, error_status, params={}):
