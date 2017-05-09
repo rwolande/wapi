@@ -1,3 +1,4 @@
 *.pyc
 venv/
 instance/config.py
+*.DS_Store

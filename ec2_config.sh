@@ -33,17 +33,25 @@ sudo mysql_install_db
 #sudo pip install flask_restful
 #sudo pip install flask_mysqldb
 #sudo pip install jwt
-
+echo "a\n]n\n"
 sudo mkdir ~/flask_app ~/dev ~/dev/api ~/dev/api/log
+echo "b\n]n\n"
 sudo mkdir /var/www/html/flask_app /var/www/html/flask_app/wapi
+echo "c\n]n\n"
 ln -sT ~/flask_app/wapi /var/www/html/flask_app/wapi
-
+echo "d\n]n\n"
 echo "Cloning wapi"
 
 git clone https://github.com/rwolande/wapi ~/flask_app
 
 echo "Done (:" > ~/flask_app/wapi/index.html
 
-echo "Now go to ~/flask_app/wapi, pip install the requirements, copy over the wsgi file, "
+echo "Now going tocopy over the wsgi file\n\n\n\n"
+
+sudo cp ~/flask_app/wapi/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 sudo apachectl restart
+
+# echo "And now file\n\n\n\n"
+
+# sudo cd ~/flask_app/wapi; sudo 
