@@ -18,4 +18,4 @@ $MYSQL -uroot -p -e "$SQL"
 
 cat create_tables.sql populate_tables.sql > create_sql
 $MYSQL -u root -p $1 < create_sql
-rm create_sql
+#rm create_sql

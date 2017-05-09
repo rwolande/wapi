@@ -12,7 +12,7 @@ import jwt
 import bcrypt
 
 from api import constants
-from api import status_codes as Status
+from api import status_codes
 
 def check_params_type(params):
 	"""Raises an exception if passed something besides a tuple"""
