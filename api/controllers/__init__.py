@@ -149,37 +149,37 @@ class BaseObject(dict):
 # 	return objects
 
 
-# def db_query_insert(sql, params=None):
-# 	"""Performs the provided insert query.
+def db_query_insert(sql, params=None):
+	"""Performs the provided insert query.
 
-# 	Args:
-# 		mysql: The mysqldb database object.
-# 		sql: The parameterized query.
-# 		params: A tuple the parameters for the query
+	Args:
+		mysql: The mysqldb database object.
+		sql: The parameterized query.
+		params: A tuple the parameters for the query
 
-# 	Returns:
-# 		The number of affected rows.
+	Returns:
+		The number of affected rows.
 
-# 	"""
+	"""
 
-# 	check_params_type(params)
-# 	conn = current_app.mysql.connection
-# 	cur = conn.cursor()
+	check_params_type(params)
+	conn = current_app.mysql.connection
+	cur = conn.cursor()
 
-# 	rows_affected = 0
+	rows_affected = 0
 
-# 	try:
-# 		cur.execute(sql, params)
-# 		rows_affected = cur.rowcount
+	try:
+		cur.execute(sql, params)
+		rows_affected = cur.rowcount
 
-# 	# If we get an exception, don't return anything
-# 	except IntegrityError as e:
-# 		current_app.logger.error("Integrity Error: " + str(e))
-# 	finally:
-# 		cur.close()
-# 		conn.commit()
+	# If we get an exception, don't return anything
+	except IntegrityError as e:
+		current_app.logger.error("Integrity Error: " + str(e))
+	finally:
+		cur.close()
+		conn.commit()
 
-# 	return rows_affected
+	return rows_affected
 
 # def db_query_update(sql, params=None):
 # 	"""Performs the provided update query.

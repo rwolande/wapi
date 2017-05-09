@@ -1,10 +1,10 @@
 CREATE TABLE user (
   id int(11) NOT NULL AUTO_INCREMENT,
   username varchar(255) NOT NULL,
-  phone_number varchar(255) NOT NULL,
   password varchar(255) NOT NULL,
-  last_login_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  phone_number varchar(255) NOT NULL DEFAULT '',
   image_source varchar(255) NOT NULL DEFAULT '',
+  last_login datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   UNIQUE KEY phone_number (phone_number)
 );
