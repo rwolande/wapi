@@ -1,0 +1,42 @@
+$api_name
+$db_name
+
+1) create instance -> instance_ip
+	[ ] port 22 (TCP), 80 (HTML), 443 (SSL) open for security group
+
+$instance_ip
+
+2) ssh in and set up ubuntu environment
+	[ ] clone rwolande/wapi in ~/flask_api
+	[ ] sudo apt install all packages in ec2_config (very with others)
+	[ ] sudo pip install -r requirements
+	[ ] mv 000-config to replace old config
+	[ ] sudo apachectl restart
+
+3) set up mysql($db_name)
+	[ ] sudo apt install all necessary packages
+	[ ] create sql user
+	[ ] create db with default tables
+
+4) set up ssl
+	[ ] set up once
+	[ ] test cron job
+
+
+
+
+
+
+
+user/get
+user/post
+user/put
+
+squads/get -> most recent iteration, members
+squads/
+
+squad/get -> all images/iterations, members
+squad/put ->
+
+canvas/post
+canvas/get
