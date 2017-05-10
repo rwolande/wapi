@@ -23,10 +23,20 @@ $instance_ip
 	[ ] test cron job
 
 
+1) automate ssl
+2) deploy to squids.wolande.earth
 
 
 
+1) create user from ios
+	salted password
+2) create group
+3) upload image to bucket from ios
+4) tap into group to load image (pull from bucket)
 
+
+
+5) push snorlax as stand alone ofr 
 
 user/get
 user/post

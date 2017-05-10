@@ -1,0 +1,11 @@
+<IfModule mod_ssl.c>
+<VirtualHost *:80>
+	ServerName ${SUBDOMAIN_TITLE}
+	ServerAdmin hi@ryanwolande.com
+	DocumentRoot /var/www/html
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+</IfModule>
