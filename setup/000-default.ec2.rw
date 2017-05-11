@@ -1,0 +1,12 @@
+<VirtualHost *>
+	ServerName ${SUBDOMAIN_TITLE}
+	
+	WSGIDaemonProcess wapi_app threads=5
+	WSGIScriptAlias / /var/www/html/flask_app/wapi/swgi.py
+
+	<Directory /var/www/html/flask_app/wapi>
+		WSGIProcessGroup wapi_app
+		WSGIApplicationGroup %{GLOBAL}
+		Require all granted
+	</Directory>
+</VirtualHost>

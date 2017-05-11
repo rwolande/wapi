@@ -17,14 +17,26 @@ then
   exit $E_BADARGS
 fi
 
+db_name=$1
+db_password=$2
+domain=$3
+
 #PHASE 1 BEGIN - Install necessary packages
 echo "Installing Packages: update, apache2, mod-wsgi, python-pip, libssl-dev, setuptools"
+
+# Uncomment if you don't run the SSL script first
 sudo apt-get -y update
 sudo apt-get -y install apache2
 sudo apt-get -y install libapache2-mod-wsgi
 sudo apt-get -y install python-pip
 sudo apt-get -y install build-essential libssl-dev libffi-dev python-dev
 sudo -H pip install -U setuptools
+sudo apt-get -y install software-properties-common
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get -y install python-certbot-apache
+
+sudo certbot --apache -d $domain
 
 echo "Installing Packages: libmysqlclient-devm mysql-server"
 sudo apt-get -y install libmysqlclient-dev
@@ -47,9 +59,6 @@ sudo pip install -r requirements.txt;
 
 #PHASE 3 BEGIN - Set up environment and database
 echo "Configuring Environment Settings"
-db_name=$1
-db_password=$2
-domain=$3
 {
   echo -n $'DB_ENV = \'local\''; echo -e $' #ENVIRONMENT (ENUM)\n'
 
@@ -62,22 +71,32 @@ domain=$3
   echo -n $'LOG_DIR = \'~/dev/api/log\''; echo ' #LOG DIRECTORY'
 } > ~/flask_app/wapi/instance/config.py
 
-
 echo "Generating basic database from api/sql/create_db script for DB ${db_name}"
 sudo ~/flask_app/wapi/api/sql/create_db $db_name
+
 #PHASE 3 COMPLETE
 
 #PHASE 4 BEGIN - Sync
-echo "Now going to copy the conf file and restart"
-sudo cp ~/flask_app/wapi/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+
+echo "Editing conf files, if this doesnt work fixes should be trivial. Check apache error log in /var/log/apache2/ if no output here but things don't work as expected."
+
+#Edit 000-default.conf adding this
+
+sudo chmod 777 /etc/apache2/sites-enabled
+{
+  echo -e "\n\tServerName ${domain}"
+  echo -e "\n\tWSGIScriptAlias / /var/www/html/flask_app/wapi/wsgi.py";
+  echo -e "\n\t<Directory /var/www/html/flask_app/wapi>";
+  echo -e "\t\tWSGIApplicationGroup %{GLOBAL}";
+  echo -e "\t\tRequire all granted";
+  echo -e "\t</Directory>";
+} > wol.conf
+sed -i "13r wol.conf" /etc/apache2/sites-enabled/000-default.conf
+sed -i "13r wol.conf" /etc/apache2/sites-enabled/000-default-le-ssl.conf
 sudo apachectl restart
-#PHASE 4 COMPLETE
-echo "At this point everything should work except SSL and salt/hash pw"
 
-#PHASE 5 BEGIN - SSL (via Let'sEncrypt)
-# sudo add-apt-repository ppa:certbot/certbot
-# sudo apt-get update
-# sudo apt-get -y install python-certbot-apache
 
-# sudo certbot --apache -d $domain
+
+
+
 echo "Done (:"

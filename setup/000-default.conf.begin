@@ -1,0 +1,18 @@
+<VirtualHost *:80>
+	ServerAdmin hi@ryanwolande.com
+	DocumentRoot /var/www/html
+
+	WSGIDaemonProcess wapi_app threads=5
+	WSGIScriptAlias / /var/www/html/flask_app/wapi/wsgi.py
+
+	<Directory /var/www/html/flask_app/wapi>
+		WSGIProcessGroup wapi_app
+		WSGIApplicationGroup %{GLOBAL}
+		Order deny,allow
+		Allow from all
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
