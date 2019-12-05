@@ -41,8 +41,8 @@ sudo certbot --apache -d $domain
 
 #PHASE 2 BEGIN - Clone wapi & link
 echo "Cloning wapi"
-mkdir ~/flask_app ~/flask_app/site ~/dev ~/dev/site ~/dev/site/log
-git clone https://github.com/rwolande/ryanwolande_site ~/flask_app/site
+mkdir ~/flask_app ~/flask_app/api ~/dev ~/dev/site ~/dev/site/log
+git clone https://github.com/rwolande/wapi ~/flask_app/api
 
 echo "Creating link"
 sudo ln -sT ~/flask_app /var/www/html/flask_app
