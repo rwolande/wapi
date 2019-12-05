@@ -36,7 +36,7 @@ sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get update
 sudo apt-get -y install python-certbot-apache
 
-#sudo certbot --apache -d $domain
+sudo certbot --apache -d $domain
 #PHASE 1 COMPLETE
 
 #PHASE 2 BEGIN - Clone wapi & link
