@@ -29,7 +29,7 @@ def before_request():
 
 	# Add anything you want to parse from the POST body
 	# to this array and it will be available in flask.g
-	post_parameters = ['name',
+	post_parameters = ['username',
 					   'password']
 					   
 	if not request.method == 'GET':
