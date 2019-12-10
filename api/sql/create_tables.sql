@@ -2,19 +2,18 @@ CREATE TABLE user (
   id int(11) NOT NULL AUTO_INCREMENT,
   username varchar(255) NOT NULL,
   password varchar(255) NOT NULL,
-  phone_number varchar(255) NOT NULL DEFAULT '',
-  image_source varchar(255) NOT NULL DEFAULT '',
   last_login datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   UNIQUE KEY phone_number (phone_number)
 );
 
-CREATE TABLE squad (
+CREATE TABLE trip (
   id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) NOT NULL,
   name varchar(255)  NOT NULL DEFAULT '',
-  start_image_source varchar(255) NOT NULL DEFAULT '',
-  current_image_source varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (id)
+  description varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (id),
+  CONSTRAINT user_fk FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
 );
 
 CREATE TABLE user_squad (
