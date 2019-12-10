@@ -1,7 +1,3 @@
-#from functools import wraps
-#import datetime
-#import logging
-
 from flask import Flask, current_app, request, jsonify, g
 from flask_restful import Resource, Api, reqparse, HTTPException
 from flask_mysqldb import MySQL
@@ -11,7 +7,7 @@ import bcrypt
 
 from api.controllers.base import BaseController
 from api.controllers.user import UserController
-#from utilities import get_log_level
+from api.controllers.register import RegisterController
 
 app = Flask(__name__, instance_relative_config=True)
 
@@ -26,6 +22,7 @@ app.mysql = MySQL(app)
 
 # define routes
 app.api.add_resource(UserController, '/user/<int:user_id>')
+app.api.add_resource(RegisterController, '/register')
 
 @app.before_request
 def before_request():
