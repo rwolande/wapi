@@ -170,7 +170,7 @@ def db_query_insert(sql, params=None):
 
 	try:
 		cur.execute(sql, params)
-		rows_affected = cur.rowcount
+		inserted_id = conn.insert_id()
 
 	# If we get an exception, don't return anything
 	except IntegrityError as e:
@@ -179,7 +179,7 @@ def db_query_insert(sql, params=None):
 		cur.close()
 		conn.commit()
 
-	return conn.insert_id()
+	return inserted_id
 
 # def db_query_update(sql, params=None):
 # 	"""Performs the provided update query.
