@@ -49,6 +49,7 @@ sudo ln -sT ~/flask_app /var/www/html/flask_app
 
 echo "Installing additional requirements"
 cd ~/flask_app/site;
+sudo apt-get install python3-dev libmysqlclient-dev;
 sudo pip install -r requirements.txt;
 mkdir instance;
 #PHASE 2 COMPLETE
