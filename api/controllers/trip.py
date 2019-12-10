@@ -20,20 +20,6 @@ class TripController(BaseController):
 	def __init__(self):
 		super(BaseController, self)
 
-	# @protected
-	def get(self, user_id, *args, **kwargs):
-
-		sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE user_id= %s'
-
-		params = (user_id,)
-
-		trips = db_query_select(sql,params)
-
-		if len(trips) == 0:
-			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
-
-		return super(UserController,self).success_response(trips)
-
 	def post(self, *args, **kwargs):
 
 		user_id = g.user_id
