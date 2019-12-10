@@ -8,6 +8,9 @@ class Status(Enum):
 	# Bad Request
 	MISSING_PARAMETERS = (40000, "Missing required parameters")
 
+	# Unknown
+	REGISTRATION_FAILED = (50000, "Registration Failed")
+
 	# Unauthorized
 	INVALID_TOKEN	= (40100, "Unauthorized.")
 	MISSING_API_KEY = (40101, "Unauthorized.")

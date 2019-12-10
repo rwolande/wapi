@@ -34,5 +34,19 @@ class RegisterController(BaseController):
 		final_password = "$".join([algorithm,salt,password_hash])
 
 		sql = 'INSERT INTO' + constants.USER_TABLE + "(username,password) VALUES (\'" + username + "\',\'" + final_password + "\')"
-		res = db_query_insert(sql)
-		return super(RegisterController,self).success_response({'result':res})
+		result_id = db_query_insert(sql)
+		if not result_id is None:
+			sql = 'SELECT * FROM' + constants.USER_TABLE + 'WHERE id= %s LIMIT 1'
+
+			params = (user_id,)
+
+			res = db_query_select(sql,params)
+
+			if len(res) == 0:
+				return super(RegisterController,self).error_response(Status.MISSING_PARAMETERS)
+
+			user = res[0]
+			return super(UserController,self).success_response({'user':user})
+
+		return super(RegisterController,self).error_response(Status.REGISTRATION_FAILED)
+
