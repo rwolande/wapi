@@ -22,9 +22,8 @@ class RegisterController(BaseController):
 
 	def post(self, *args, **kwargs):
 
-		body = request.get_json
-		username = body['username']
-		password = body['password']
+		username = g.username
+		password = g.password
 
 		algorithm = 'sha512'  
 		salt = uuid.uuid4().hex 
@@ -36,5 +35,4 @@ class RegisterController(BaseController):
 
 		sql = 'INSERT INTO' + constants.USER_TABLE + "(username,password) VALUES (\'" + username + "\',\'" + final_password + "\')"
 		res = db_query_insert(sql)
-
-		return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
+		return super(UserController,self).success_response({'result':res})
