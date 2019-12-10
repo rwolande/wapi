@@ -35,4 +35,4 @@ class RegisterController(BaseController):
 
 		sql = 'INSERT INTO' + constants.USER_TABLE + "(username,password) VALUES (\'" + username + "\',\'" + final_password + "\')"
 		res = db_query_insert(sql)
-		return super(UserController,self).success_response({'result':res})
+		return super(RegisterController,self).success_response({'result':res})
