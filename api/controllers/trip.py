@@ -42,7 +42,7 @@ class TripController(BaseController):
 		endDate = g.endDate
 		comment = g.comment
 
-		sql = 'INSERT INTO' + constants.TRIP_TABLE + "(user_id,destination,start_date,end_date,comment) VALUES (\'" + user_id + "\',\'" + destination + "\',\'" + start_date "\',\'" + end_date + "\',\'" + comment + "\')"
+		sql = 'INSERT INTO' + constants.TRIP_TABLE + "(user_id,destination,start_date,end_date,comment) VALUES (\'" + user_id + "\',\'" + destination + "\',\'" + start_date + "\',\'" + end_date + "\',\'" + comment + "\')"
 		result_id = db_query_insert(sql)
 		if not result_id is None:
 			sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE id= %s LIMIT 1'
