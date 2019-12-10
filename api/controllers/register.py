@@ -38,7 +38,7 @@ class RegisterController(BaseController):
 		if not result_id is None:
 			sql = 'SELECT * FROM' + constants.USER_TABLE + 'WHERE id= %s LIMIT 1'
 
-			params = (user_id,)
+			params = (result_id,)
 
 			res = db_query_select(sql,params)
 
