@@ -179,7 +179,7 @@ def db_query_insert(sql, params=None):
 		cur.close()
 		conn.commit()
 
-	return rows_affected
+	return conn.insert_id()
 
 # def db_query_update(sql, params=None):
 # 	"""Performs the provided update query.

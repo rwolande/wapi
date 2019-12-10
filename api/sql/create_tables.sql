@@ -11,7 +11,9 @@ CREATE TABLE trip (
   id int(11) NOT NULL AUTO_INCREMENT,
   user_id int(11) NOT NULL,
   name varchar(255)  NOT NULL DEFAULT '',
-  description varchar(255) NOT NULL DEFAULT '',
+  start_date datetime DEFAULT NULL,
+  end_date datetime DEFAULT NULL,
+  comment varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (id),
   CONSTRAINT user_fk FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
 );
