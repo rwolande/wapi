@@ -23,7 +23,7 @@ class UserController(BaseController):
 	# @protected
 	def get(self, user_id, *args, **kwargs):
 
-		sql = 'SELECT * FROM' + constants.USER_TABLE + 'WHERE id= %s LIMIT 1'
+		sql = 'SELECT id,role FROM' + constants.USER_TABLE + 'WHERE id= %s LIMIT 1'
 
 		params = (user_id,)
 
@@ -33,4 +33,5 @@ class UserController(BaseController):
 			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
 
 		user = res[0]
-		return super(UserController,self).success_response({'user':user})
+		return super(UserController,self).success_response(user)
+
