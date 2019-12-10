@@ -46,7 +46,7 @@ class RegisterController(BaseController):
 				return super(RegisterController,self).error_response(Status.MISSING_PARAMETERS)
 
 			user = res[0]
-			return super(RegisterController,self).success_response({'user':user})
+			return super(RegisterController,self).success_response(user)
 
 		return super(RegisterController,self).error_response(Status.REGISTRATION_FAILED)
 
