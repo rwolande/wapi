@@ -176,8 +176,8 @@ def db_query_insert(sql, params=None):
 		current_app.logger.error("Integrity Error: " + str(e))
 	finally:
 		cur.close()
-		inserted_id = conn.insert_id()
 		conn.commit()
+		inserted_id = conn.insert_id()
 
 	return inserted_id
 
