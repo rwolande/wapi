@@ -24,6 +24,7 @@ class RegisterController(BaseController):
 
 		username = g.username
 		password = g.password
+		role = g.role
 
 		algorithm = 'sha512'  
 		salt = uuid.uuid4().hex 
@@ -33,7 +34,7 @@ class RegisterController(BaseController):
 		password_hash = m.hexdigest()
 		final_password = "$".join([algorithm,salt,password_hash])
 
-		sql = 'INSERT INTO' + constants.USER_TABLE + "(username,password) VALUES (\'" + username + "\',\'" + final_password + "\')"
+		sql = 'INSERT INTO' + constants.USER_TABLE + "(username,password,role) VALUES (\'" + username + "\',\'" + final_password + "\',\'"  + role + "\')"
 		result_id = db_query_insert(sql)
 		if not result_id is None:
 			sql = 'SELECT * FROM' + constants.USER_TABLE + 'WHERE id= %s LIMIT 1'

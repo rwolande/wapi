@@ -23,6 +23,8 @@ app.mysql = MySQL(app)
 # define routes
 app.api.add_resource(UserController, '/user/<int:user_id>')
 app.api.add_resource(RegisterController, '/register')
+app.api.add_resource(TripController, '/trip')
+app.api.add_resource(TripController, '/trip/<int:user_id')
 
 @app.before_request
 def before_request():
@@ -30,7 +32,13 @@ def before_request():
 	# Add anything you want to parse from the POST body
 	# to this array and it will be available in flask.g
 	post_parameters = ['username',
-					   'password']
+					   'password',
+					   'role',
+					   'user_id',
+					   'destination'
+					   'start_date',
+					   'end_date',
+					   'comment',]
 					   
 	if not request.method == 'GET':
 		for param in post_parameters:
