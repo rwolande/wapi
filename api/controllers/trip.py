@@ -40,3 +40,12 @@ class TripController(BaseController):
 			return super(TripController,self).success_response({"trips":trips})
 
 		return super(TripController,self).error_response(Status.MISSING_PARAMETERS)
+
+	def delete(self, trip_id, *args, **kwargs):
+		sql = 'DELETE FROM' + constants.TRIP_TABLE + 'WHERE id=%s'
+
+		params = (trip_id,)
+
+		trips = db_query_delete(sql,params)
+
+		return super(TripsController,self).success_response({"trips":trips})

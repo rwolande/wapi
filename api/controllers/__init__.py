@@ -164,7 +164,7 @@ def db_query_insert(sql, params=None):
 		params: A tuple the parameters for the query
 
 	Returns:
-		The number of affected rows.
+		The id of the new row.
 
 	"""
 
@@ -201,19 +201,35 @@ def db_query_insert(sql, params=None):
 # 	"""
 # 	return db_query_insert(sql, params)
 
-# def db_query_delete(sql, params=None):
-# 	"""Performs the provided delete query.
+def db_query_delete(sql, params=None):
+	"""Performs the provided delete query.
 
-# 	Args:
-# 		mysql: The mysqldb database object.
-# 		sql: The parameterized query.
-# 		params: A tuple the parameters for the query
+	Args:
+		mysql: The mysqldb database object.
+		sql: The parameterized query.
+		params: A tuple the parameters for the query
 
-# 	Returns:
-# 		The number of affected rows.
+	Returns:
+		The number of affected rows.
 
-# 	"""
-# 	return db_query_insert(sql, params)
+	"""
+	check_params_type(params)
+	conn = current_app.mysql.connection
+	cur = conn.cursor()
+
+	rows_affected = 0
+
+	try:
+		cur.execute(sql, params)
+
+	# If we get an exception, don't return anything
+	except IntegrityError as e:
+		current_app.logger.error("Integrity Error: " + str(e))
+	finally:
+		cur.close()
+		conn.commit()
+
+	return rows_affected
 
 # Returns a tuple with the coordinates for the bounding box
 # Order: (lat_min, lat_max, lon_min, lon_max,)
