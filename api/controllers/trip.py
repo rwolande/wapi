@@ -24,8 +24,8 @@ class TripController(BaseController):
 
 		user_id = g.user_id
 		destination = g.destination
-		startDate = g.startDate
-		endDate = g.endDate
+		startDate = g.start_date
+		endDate = g.end_date
 		comment = g.comment
 
 		sql = 'INSERT INTO' + constants.TRIP_TABLE + "(user_id,destination,start_date,end_date,comment) VALUES (\'" + user_id + "\',\'" + destination + "\',\'" + start_date + "\',\'" + end_date + "\',\'" + comment + "\')"
