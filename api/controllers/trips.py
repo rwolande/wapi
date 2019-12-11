@@ -29,4 +29,4 @@ class TripsController(BaseController):
 
 		trips = db_query_select(sql,params)
 
-		return super(TripsController,self).success_response({"trips":trips})
+		return super(TripController,self).success_response({"trips":trips})
