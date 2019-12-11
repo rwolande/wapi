@@ -28,7 +28,7 @@ class UserController(BaseController):
 
 		sql = 'SELECT id,username,role,password FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
 
-		params = (user_id,)
+		params = (username,)
 
 		res = db_query_select(sql,params)
 		user = res[0]
