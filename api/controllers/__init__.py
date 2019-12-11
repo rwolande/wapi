@@ -172,8 +172,6 @@ def db_query_insert(sql, params=None):
 	conn = current_app.mysql.connection
 	cur = conn.cursor()
 
-	rows_affected = 0
-
 	try:
 		cur.execute(sql, params)
 		inserted_id = conn.insert_id()
@@ -187,19 +185,37 @@ def db_query_insert(sql, params=None):
 
 	return inserted_id
 
-# def db_query_update(sql, params=None):
-# 	"""Performs the provided update query.
+def db_query_update(sql, params=None):
+	"""Performs the provided update query.
 
-# 	Args:
-# 		mysql: The mysqldb database object.
-# 		sql: The parameterized query.
-# 		params: A tuple the parameters for the query
+	Args:
+		mysql: The mysqldb database object.
+		sql: The parameterized query.
+		params: A tuple the parameters for the query
 
-# 	Returns:
-# 		The number of affected rows.
+	Returns:
+		The number of affected rows.
 
-# 	"""
-# 	return db_query_insert(sql, params)
+	"""
+
+	check_params_type(params)
+	conn = current_app.mysql.connection
+	cur = conn.cursor()
+
+	rows_affected = 0
+
+	try:
+		cur.execute(sql, params)
+		#rows_affected
+
+	# If we get an exception, don't return anything
+	except IntegrityError as e:
+		current_app.logger.error("Integrity Error: " + str(e))
+	finally:
+		cur.close()
+		conn.commit()
+
+	return rows_affected
 
 def db_query_delete(sql, params=None):
 	"""Performs the provided delete query.

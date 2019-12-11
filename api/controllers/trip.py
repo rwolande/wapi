@@ -54,3 +54,23 @@ class TripController(BaseController):
 		params = (user_id,)
 		trips = db_query_select(sql,params)
 		return super(TripController,self).success_response({"trips":trips})
+
+	def put(self, *args, **kwargs):
+
+		user_id = g.user_id
+		trip_id = g.trip_id
+		destination = g.destination
+		start_date = g.start_date
+		end_date = g.end_date
+		comment = g.comment
+
+		sql = 'UPDATE' + constants.TRIP_TABLE + "SET destination=%s,start_date=%s,end_date=%s,comment=%s WHERE trip_id=%s AND user_id=%s"
+		params = (destination,start_date,end_date,comment,trip_id,user_id,)
+		result_id = db_query_update(sql,params)
+		if not result_id is None:
+			sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE user_id=%s ORDER BY start_date DESC'
+			params = (user_id,)
+			trips = db_query_select(sql,params)
+			return super(TripController,self).success_response({"trips":trips})
+
+		return super(TripController,self).error_response(Status.MISSING_PARAMETERS)
