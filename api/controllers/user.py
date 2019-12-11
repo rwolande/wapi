@@ -21,17 +21,36 @@ class UserController(BaseController):
 		super(BaseController, self)
 
 	# @protected
-	def get(self, user_id, *args, **kwargs):
+	def post(self, *args, **kwargs):
 
-		sql = 'SELECT id,username,role FROM' + constants.USER_TABLE + 'WHERE id= %s LIMIT 1'
+		username = g.username
+		password = g.password
+
+		sql = 'SELECT id,username,role,password FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
 
 		params = (user_id,)
 
 		res = db_query_select(sql,params)
-
 		if len(res) == 0:
 			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
 
-		user = res[0]
-		return super(UserController,self).success_response({"user":user})
+		if comparePasswords(password,res["password"]):
+			return super(UserController,self).success_response({"user":user})
+		else:
+			return super(UserController,self).error_response(Status.BAD_PASSWORD)
 
+	def comparePasswords(password,full):
+		m = hashlib.new(algorithm)
+		m.update(salt + password)
+		password_hash = m.hexdigest()
+
+		parts = full.split("$")
+		algorithm = parts[0]
+		salt = parts[1]
+		password_hash = parts[2]
+
+		m = hashlib.new(algorithm)
+		m.update(salt + password)
+		newPasswordResult = m.hexdigest()
+
+		return newPasswordResult == password_hash

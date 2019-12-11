@@ -21,6 +21,12 @@ def check_params_type(params):
 		msg = "db_query_* functions require the params arg to be a tuple! Got: " + str(type(params))
 		raise Exception(msg)
 
+def safe_str(obj):
+    try: return str(obj)
+    except UnicodeEncodeError:
+        return obj.encode('ascii', 'ignore').decode('ascii')
+    return ""
+
 def db_query_select(sql, params=None):
 	"""Queries the database and returns a generator with the results.
 
@@ -47,7 +53,7 @@ def db_query_select(sql, params=None):
 		if cur.description:
 			cols = [col[0] for col in cur.description]
 			for res in cur:
-				serialized_res = [str(x) for x in res]
+				serialized_res = [safe_str(x) for x in res]
 				objects.append(BaseObject(dict(zip(cols,serialized_res))))
 
 	finally:

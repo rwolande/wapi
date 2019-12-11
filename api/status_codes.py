@@ -11,6 +11,7 @@ class Status(Enum):
 
 	# Unknown
 	REGISTRATION_FAILED = (500, "Registration Failed")
+	BAD_PASSWORD = (501,"Bad Password")
 
 	# Unauthorized
 	INVALID_TOKEN	= (401, "Unauthorized.")
