@@ -53,4 +53,4 @@ class TripController(BaseController):
 		sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE user_id=%s ORDER BY start_date DESC'
 		params = (user_id,)
 		trips = db_query_select(sql,params)
-		return super(TripsController,self).success_response({"trips":trips})
+		return super(TripController,self).success_response({"trips":trips})
