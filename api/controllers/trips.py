@@ -23,13 +23,13 @@ class TripsController(BaseController):
 	# @protected
 	def get(self, user_id, *args, **kwargs):
 
-		sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE user_id= %s'
+		sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE user_id=%s'
 
 		params = (user_id,)
 
 		trips = db_query_select(sql,params)
 
 		if len(trips) == 0:
-			return super(TripsController,self).error_response(Status.MISSING_PARAMETERS)
+			return super(TripsController,self).error_response(Status.EMPTY_SET)
 
-		return super(TripsController,self).success_response(trips)
+		return super(TripsController,self).success_response({"trips":trips})

@@ -4,6 +4,7 @@ class Status(Enum):
 
 	# Success
 	SUCCESS = (200, "Success")
+	EMPTY_SET = (200, "Empty Set")
 
 	# Bad Request
 	MISSING_PARAMETERS = (400, "Missing required parameters")
