@@ -31,7 +31,7 @@ class TripController(BaseController):
 		sql = 'INSERT INTO' + constants.TRIP_TABLE + "(user_id,destination,start_date,end_date,comment) VALUES (\'" + user_id + "\',\'" + destination + "\',\'" + start_date + "\',\'" + end_date + "\',\'" + comment + "\')"
 		result_id = db_query_insert(sql)
 		if not result_id is None:
-			sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE id= %s LIMIT 1'
+			sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE id=%s LIMIT 1'
 
 			params = (result_id,)
 
@@ -40,6 +40,6 @@ class TripController(BaseController):
 			if len(trips) == 0:
 				return super(TripController,self).error_response(Status.MISSING_PARAMETERS)
 
-			return super(TripController,self).success_response(trips)
+			return super(TripController,self).success_response({"trips":trips})
 
-		return super(TripController,self).error_response(Status.REGISTRATION_FAILED)
+		return super(TripController,self).error_response(Status.MISSING_PARAMETERS)

@@ -33,5 +33,5 @@ class UserController(BaseController):
 			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
 
 		user = res[0]
-		return super(UserController,self).success_response(user)
+		return super(UserController,self).success_response({"user":user})
 
