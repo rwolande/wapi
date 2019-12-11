@@ -206,7 +206,7 @@ def db_query_update(sql, params=None):
 
 	try:
 		cur.execute(sql, params)
-		#rows_affected
+		rows_affected = cur.rowcount
 
 	# If we get an exception, don't return anything
 	except IntegrityError as e:
