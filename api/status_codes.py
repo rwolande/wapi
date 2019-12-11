@@ -3,17 +3,17 @@ from enum import Enum
 class Status(Enum):
 
 	# Success
-	SUCCESS = (20000, "Success")
+	SUCCESS = (200, "Success")
 
 	# Bad Request
-	MISSING_PARAMETERS = (40000, "Missing required parameters")
+	MISSING_PARAMETERS = (400, "Missing required parameters")
 
 	# Unknown
-	REGISTRATION_FAILED = (50000, "Registration Failed")
+	REGISTRATION_FAILED = (500, "Registration Failed")
 
 	# Unauthorized
-	INVALID_TOKEN	= (40100, "Unauthorized.")
-	MISSING_API_KEY = (40101, "Unauthorized.")
+	INVALID_TOKEN	= (401, "Unauthorized.")
+	MISSING_API_KEY = (401, "Unauthorized.")
 
 	# Server Errors
 
