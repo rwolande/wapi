@@ -37,7 +37,7 @@ def before_request():
 					   'password',
 					   'role',
 					   'user_id',
-					   'destination'
+					   'destination',
 					   'start_date',
 					   'end_date',
 					   'comment',]
