@@ -13,7 +13,7 @@ import uuid
 from api.controllers.base import BaseController
 from api import constants
 from api.status_codes import Status
-from api.controllers import db_query_select, db_query_insert, db_query_delete
+from api.controllers import db_query_select, db_query_insert, db_query_delete, db_query_update
 
 class TripController(BaseController):
 
