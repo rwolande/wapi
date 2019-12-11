@@ -23,7 +23,7 @@ app.api = Api(app)
 app.mysql = MySQL(app)
 
 # define routes
-app.api.add_resource(UserController, '/user/<int:user_id>')
+app.api.add_resource(UserController, '/user')
 app.api.add_resource(RegisterController, '/register')
 app.api.add_resource(TripController, '/trip')
 app.api.add_resource(TripsController, '/trips/<int:user_id>')
