@@ -25,8 +25,7 @@ app.mysql = MySQL(app)
 # define routes
 app.api.add_resource(UserController, '/user')
 app.api.add_resource(RegisterController, '/register')
-app.api.add_resource(TripController, '/trip', endpoint = 'trip')
-app.api.add_resource(TripController, '/trip/<int:trip_id>', endpoint = 'trip')
+app.api.add_resource(TripController, '/trip')
 app.api.add_resource(TripsController, '/trips/<int:user_id>')
 
 @app.before_request
@@ -34,17 +33,18 @@ def before_request():
 
 	# Add anything you want to parse from the POST body
 	# to this array and it will be available in flask.g
-	post_parameters = ['username',
+	parameters = ['username',
 					   'password',
 					   'role',
 					   'user_id',
 					   'destination',
 					   'start_date',
 					   'end_date',
-					   'comment',]
+					   'comment',
+					   'trip_id']
 					   
 	if not request.method == 'GET':
-		for param in post_parameters:
+		for param in parameters:
 			value = request.json[param] if param in request.json else None
 			setattr(g,param,value)
 
