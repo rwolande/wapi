@@ -37,7 +37,7 @@ class RegisterController(BaseController):
 		sql = 'INSERT INTO' + constants.USER_TABLE + "(username,password,role) VALUES (\'" + username + "\',\'" + final_password + "\',\'"  + role + "\')"
 		result_id = db_query_insert(sql)
 		if not result_id is None:
-			sql = 'SELECT * FROM' + constants.USER_TABLE + 'WHERE id=%s LIMIT 1'
+			sql = 'SELECT id,username,role FROM' + constants.USER_TABLE + 'WHERE id=%s LIMIT 1'
 
 			params = (result_id,)
 

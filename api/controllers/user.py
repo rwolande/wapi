@@ -23,7 +23,7 @@ class UserController(BaseController):
 	# @protected
 	def get(self, user_id, *args, **kwargs):
 
-		sql = 'SELECT id,role FROM' + constants.USER_TABLE + 'WHERE id= %s LIMIT 1'
+		sql = 'SELECT id,username,role FROM' + constants.USER_TABLE + 'WHERE id= %s LIMIT 1'
 
 		params = (user_id,)
 
