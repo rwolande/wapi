@@ -31,16 +31,17 @@ class UserController(BaseController):
 		params = (username,)
 
 		res = db_query_select(sql,params)
-		user = res[0]
-		return super(UserController,self).success_response({"user":user})
-		# if len(res) == 0:
-		# 	return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
+		if len(res) == 0:
+			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
 
-		# if comparePasswords(password,res["password"]):
-		# 	user = res[0]
-		# 	return super(UserController,self).success_response({"user":user})
-		# else:
-		# 	return super(UserController,self).error_response(Status.BAD_PASSWORD)
+		# user = res[0]
+		# return super(UserController,self).success_response({"user":user})
+
+		if comparePasswords(password,user["password"]):
+			user = res[0]
+			return super(UserController,self).success_response({"user":user})
+		else:
+			return super(UserController,self).error_response(Status.BAD_PASSWORD)
 
 	def comparePasswords(password,full):
 		m = hashlib.new(algorithm)
