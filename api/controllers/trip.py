@@ -33,7 +33,7 @@ class TripController(BaseController):
 		if not result_id is None:
 			sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE id=%s'
 
-			params = (result_id,)
+			params = (user_id,)
 
 			trips = db_query_select(sql,params)
 
