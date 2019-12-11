@@ -34,19 +34,16 @@ class UserController(BaseController):
 		if len(res) == 0:
 			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
 
-		# user = res[0]
+		user = res[0]
 		# return super(UserController,self).success_response({"user":user})
 
-		if comparePasswords(password,user["password"]):
+		if self.comparePasswords(password,user["password"]):
 			user = res[0]
 			return super(UserController,self).success_response({"user":user})
 		else:
 			return super(UserController,self).error_response(Status.BAD_PASSWORD)
 
-	def comparePasswords(password,full):
-		m = hashlib.new(algorithm)
-		m.update(salt + password)
-		password_hash = m.hexdigest()
+	def comparePasswords(self,password,full):
 
 		parts = full.split("$")
 		algorithm = parts[0]
@@ -55,6 +52,6 @@ class UserController(BaseController):
 
 		m = hashlib.new(algorithm)
 		m.update(salt + password)
-		newPasswordResult = m.hexdigest()
+		new_password_hash = m.hexdigest()
 
 		return newPasswordResult == password_hash
