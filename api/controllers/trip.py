@@ -37,9 +37,6 @@ class TripController(BaseController):
 
 			trips = db_query_select(sql,params)
 
-			if len(trips) == 0:
-				return super(TripController,self).error_response(Status.MISSING_PARAMETERS)
-
 			return super(TripController,self).success_response({"trips":trips})
 
 		return super(TripController,self).error_response(Status.MISSING_PARAMETERS)

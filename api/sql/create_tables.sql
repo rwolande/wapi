@@ -2,7 +2,6 @@ CREATE TABLE user (
   id int(11) NOT NULL AUTO_INCREMENT,
   username varchar(255) NOT NULL,
   password varchar(255) NOT NULL,
-  last_login datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   role int(3) NOT NULL DEFAULT 1,
   PRIMARY KEY (id),
   UNIQUE KEY username (username)
