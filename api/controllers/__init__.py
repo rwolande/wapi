@@ -47,7 +47,7 @@ def db_query_select(sql, params=None):
 		if cur.description:
 			cols = [col[0] for col in cur.description]
 			for res in cur:
-				serialized_res = [x.encode('utf-8') for x in res]
+				serialized_res = [repr(x).encode('utf-8') for x in res]
 				objects.append(BaseObject(dict(zip(cols,serialized_res))))
 
 	finally:
