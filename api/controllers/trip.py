@@ -64,7 +64,7 @@ class TripController(BaseController):
 		end_date = g.end_date
 		comment = g.comment
 
-		sql = 'UPDATE' + constants.TRIP_TABLE + "SET destination=%s,start_date=%s,end_date=%s,comment=%s WHERE trip_id=%s AND user_id=%s"
+		sql = 'UPDATE' + constants.TRIP_TABLE + "SET destination=%s,start_date=%s,end_date=%s,comment=%s WHERE id=%s AND user_id=%s"
 		params = (destination,start_date,end_date,comment,trip_id,user_id,)
 		result_id = db_query_update(sql,params)
 		if not result_id is None:
