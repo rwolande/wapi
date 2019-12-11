@@ -54,4 +54,4 @@ class UserController(BaseController):
 		m.update(salt + password)
 		new_password_hash = m.hexdigest()
 
-		return newPasswordResult == password_hash
+		return new_password_hash == password_hash
