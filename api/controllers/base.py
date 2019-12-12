@@ -1,3 +1,5 @@
+import hashlib, uuid
+
 from flask import Flask, current_app, request, jsonify
 from flask_restful import Resource
 
