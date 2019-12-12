@@ -20,7 +20,7 @@ class UserController(BaseController):
 
 		trips = db_query_delete(sql,params)
 
-		return super(UserController,self).getAllUsers()
+		return super(UserController,self).get_all_users()
 
 	def put(self, user_id, *args, **kwargs):
 		username = g.username
@@ -32,4 +32,4 @@ class UserController(BaseController):
 		if result_id is None:
 			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
 		
-		return super(UserController,self).getAllUsers()
+		return super(UserController,self).get_all_users()

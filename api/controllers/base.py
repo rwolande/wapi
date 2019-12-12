@@ -23,13 +23,13 @@ class BaseController(Resource):
 		params['message'] = error_status.message
 		return jsonify(params)
 
-	def getSaltedPassword(self,algorithm,salt,password):
+	def get_salted_password(self,algorithm,salt,password):
 		m = hashlib.new(algorithm)
 		m.update(salt + password)
 		password_hash = m.hexdigest()
 		return password_hash
 
-	def getAllUsers(self):
+	def get_all_users(self):
 		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY id DESC'
 		users = db_query_select(sql)
 		return self.success_response({"users":users})
@@ -48,3 +48,13 @@ class BaseController(Resource):
 			)
 		except Exception as e:
 			return e
+
+	@staticmethod
+	def decode_auth_token(auth_token):
+		try:
+			payload = jwt.decode(auth_token, current_app.config['JWT_KEY'])
+			return payload['sub']
+		except jwt.ExpiredSignatureError:
+			return 'Signature expired. Please log in again.'
+		except jwt.InvalidTokenError:
+			return 'Invalid token. Please log in again.'

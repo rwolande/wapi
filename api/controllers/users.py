@@ -14,4 +14,4 @@ class UsersController(BaseController):
 		super(BaseController, self)
 
 	def get(self, *args, **kwargs):
-		return super(UsersController,self).getAllUsers()
+		return super(UsersController,self).get_all_users()

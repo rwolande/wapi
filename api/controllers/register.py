@@ -23,7 +23,7 @@ class RegisterController(BaseController):
 
 		algorithm = 'sha512'  
 		salt = uuid.uuid4().hex 
-		password_hash = super(RegisterController,self).getSaltedPassword(algorithm,salt,password)
+		password_hash = super(RegisterController,self).get_salted_password(algorithm,salt,password)
 		final_password = "$".join([algorithm,salt,password_hash])
 
 		sql = 'INSERT INTO' + constants.USER_TABLE + "(username,password,role) VALUES (\'" + username + "\',\'" + final_password + "\',\'"  + role + "\')"
@@ -41,4 +41,6 @@ class RegisterController(BaseController):
 			return super(RegisterController,self).error_response(Status.MISSING_PARAMETERS)
 
 		user = res[0]
+		auth_token = super(RegisterController,self).encode_auth_token(user["id"])
+		user["auth_token"] = auth_token
 		return super(RegisterController,self).success_response({"user":user})

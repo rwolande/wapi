@@ -36,6 +36,8 @@ class TripsController(BaseController):
 
 			trips = db_query_select(sql,params)
 
-			return super(TripsController,self).success_response({"trips":trips})
+			key = request.headers.get('Authorization')
+
+			return super(TripsController,self).success_response({"trips":trips,"key":key})
 
 		return super(TripsController,self).error_response(Status.MISSING_PARAMETERS)
