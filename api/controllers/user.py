@@ -1,6 +1,3 @@
-import hashlib
-import uuid
-
 from flask import Flask, current_app, request, jsonify
 from flask_restful import Resource, Api, reqparse, HTTPException
 from flask_mysqldb import MySQL
@@ -16,49 +13,12 @@ class UserController(BaseController):
 	def __init__(self):
 		super(BaseController, self)
 
-	# @protected
-	def post(self, *args, **kwargs):
+	def get(self, user_id, *args, **kwargs):
+		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY id DESC'
+		users = db_query_select(sql)
+		return super(UserController,self).success_response({"users":users})
 
-		username = g.username
-		password = g.password
-
-		hashed_password = self.getPasswordForUser(username)
-		if not self.comparePasswords(password,hashed_password):
-			return super(UserController,self).error_response(Status.BAD_PASSWORD)
-
-		sql = 'SELECT id,username,role,password FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
-		params = (username,)
-		res = db_query_select(sql,params)
-		if len(res) == 0:
-			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
-
-		user = res[0]
-		return super(UserController,self).success_response({"user":user})
-
-	def getPasswordForUser(self,username):
-		sql = 'SELECT password FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
-		params = (username,)
-		res = db_query_select(sql,params)
-		if len(res) == 0:
-			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
-		user = res[0]
-		return user["password"]
-
-	def comparePasswords(self,password,full):
-
-		parts = full.split("$")
-		algorithm = parts[0]
-		salt = parts[1]
-		password_hash = parts[2]
-
-		m = hashlib.new(algorithm)
-		m.update(salt + password)
-		new_password_hash = m.hexdigest()
-
-		return new_password_hash == password_hash
-
-	def delete(self, *args, **kwargs):
-		user_id = g.user_id
+	def delete(self, user_id, *args, **kwargs):
 		sql = 'DELETE FROM' + constants.USER_TABLE + 'WHERE id=%s'
 
 		params = (user_id,)
@@ -71,8 +31,6 @@ class UserController(BaseController):
 		return super(UserController,self).success_response({"users":users})
 
 	def put(self, *args, **kwargs):
-
-		user_id = g.user_id
 		username = g.username
 		role = g.role
 

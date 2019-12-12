@@ -6,9 +6,9 @@ import jwt
 import bcrypt
 
 from api.controllers.base import BaseController
-from api.controllers.user import UserController
-from api.controllers.users import UsersController
 from api.controllers.register import RegisterController
+from api.controllers.login import LogInController
+from api.controllers.user import UserController
 from api.controllers.trip import TripController
 from api.controllers.trips import TripsController
 
@@ -24,9 +24,9 @@ app.api = Api(app)
 app.mysql = MySQL(app)
 
 # define routes
-app.api.add_resource(UserController, '/user')
-app.api.add_resource(UsersController, '/users')
 app.api.add_resource(RegisterController, '/register')
+app.api.add_resource(LogInController, '/login')
+app.api.add_resource(UserController, '/user/<int:user_id>')
 app.api.add_resource(TripController, '/trip')
 app.api.add_resource(TripsController, '/trips/<int:user_id>')
 
