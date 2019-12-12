@@ -1,15 +1,10 @@
-import datetime
+import datetime, hashlib, uuid
 
-from flask import Flask, current_app
-from flask import request
-from flask import jsonify
+from flask import Flask, current_app, request, jsonify
 from flask_restful import Resource, Api, reqparse, HTTPException
 from flask_mysqldb import MySQL
 from flask import g
-import hashlib
-import uuid
 
-#import db_query_select, db_query_update
 from api.controllers.base import BaseController
 from api import constants
 from api.status_codes import Status
