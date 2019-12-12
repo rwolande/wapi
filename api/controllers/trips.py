@@ -36,7 +36,7 @@ class TripsController(BaseController):
 
 			trips = db_query_select(sql,params)
 
-			key = request.headers.get('Authorization')
+			key = request.headers.get('JWT-Auth')
 
 			return super(TripsController,self).success_response({"trips":trips,"key":key})
 
