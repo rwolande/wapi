@@ -16,4 +16,4 @@ class UsersController(BaseController):
 	def get(self, user_id, *args, **kwargs):
 		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY user_id ASC'
 		users = db_query_select(sql)
-		return super(TripController,self).success_response({"users":users})
+		return super(UsersController,self).success_response({"users":users})

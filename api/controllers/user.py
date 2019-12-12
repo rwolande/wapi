@@ -68,7 +68,7 @@ class UserController(BaseController):
 		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY user_id ASC'
 		params = (user_id,)
 		users = db_query_select(sql,params)
-		return super(TripController,self).success_response({"users":users})
+		return super(UserController,self).success_response({"users":users})
 
 	def put(self, *args, **kwargs):
 
@@ -83,7 +83,7 @@ class UserController(BaseController):
 			sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY user_id ASC'
 			params = (user_id,)
 			users = db_query_select(sql,params)
-			return super(TripController,self).success_response({"users":users})
+			return super(UserController,self).success_response({"users":users})
 
 
 

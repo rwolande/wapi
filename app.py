@@ -7,6 +7,7 @@ import bcrypt
 
 from api.controllers.base import BaseController
 from api.controllers.user import UserController
+from api.controllers.users import UsersController
 from api.controllers.register import RegisterController
 from api.controllers.trip import TripController
 from api.controllers.trips import TripsController
