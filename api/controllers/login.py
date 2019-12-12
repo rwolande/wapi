@@ -32,7 +32,9 @@ class LogInController(BaseController):
 			return super(LogInController,self).error_response(Status.MISSING_PARAMETERS)
 
 		user = res[0]
-		return super(LogInController,self).success_response({"user":user})
+
+		auth_token = super(LogInController,self).encode_auth_token(user["id"])
+		return super(LogInController,self).success_response({"user":user,"auth_token":auth_token})
 
 	def getPasswordForUser(self,username):
 		sql = 'SELECT password FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'

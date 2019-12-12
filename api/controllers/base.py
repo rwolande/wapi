@@ -1,4 +1,4 @@
-import hashlib, uuid
+import datetime, hashlib, uuid
 
 from flask import Flask, current_app, request, jsonify
 from flask_restful import Resource, Api, reqparse, HTTPException
@@ -33,3 +33,22 @@ class BaseController(Resource):
 		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY id DESC'
 		users = db_query_select(sql)
 		return self.success_response({"users":users})
+
+	def encode_auth_token(self, user_id):
+    """
+    Generates the Auth Token
+    :return: string
+    """
+	    try:
+	        payload = {
+	            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=1800),
+	            'iat': datetime.datetime.utcnow(),
+	            'sub': user_id
+	        }
+	        return jwt.encode(
+	            payload,
+	            app.config.get('JWT_KEY'),
+	            algorithm='HS256'
+	        )
+	    except Exception as e:
+	        return e
