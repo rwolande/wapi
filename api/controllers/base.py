@@ -1,5 +1,7 @@
 import datetime, hashlib, uuid, jwt
 
+import app
+
 from flask import Flask, current_app, request, jsonify
 from flask_restful import Resource, Api, reqparse, HTTPException
 from flask_mysqldb import MySQL
