@@ -21,8 +21,7 @@ class UserController(BaseController):
 		trips = db_query_delete(sql,params)
 
 		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY user_id DESC'
-		params = (user_id,)
-		users = db_query_select(sql,params)
+		users = db_query_select(sql)
 		return super(UserController,self).success_response({"users":users})
 
 	def put(self, user_id, *args, **kwargs):
@@ -32,8 +31,8 @@ class UserController(BaseController):
 		sql = 'UPDATE' + constants.USER_TABLE + "SET username=%s,role=%s WHERE id=%s"
 		params = (username,role,user_id)
 		result_id = db_query_update(sql,params)
-		if not result_id is None:
-			sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY user_id DESC'
-			params = (user_id,)
-			users = db_query_select(sql,params)
-			return super(UserController,self).success_response({"users":users})
+		if result_id is None:
+			return super(TripController,self).error_response(Status.MISSING_PARAMETERS)
+		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY id DESC'
+		users = db_query_select(sql)
+		return super(UserController,self).success_response({"users":users})
