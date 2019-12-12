@@ -23,7 +23,7 @@ class LogInController(BaseController):
 
 		hashed_password = self.get_password_for_user(username)
 		if not self.compare_passwords(password,hashed_password):
-			return super(LogInController,self).error_response(Status.BAD_PASSWORD)
+			return BaseController.error_response(Status.BAD_PASSWORD)
 
 		sql = 'SELECT id,username,role FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
 		params = (username,)
@@ -33,16 +33,16 @@ class LogInController(BaseController):
 
 		user = res[0]
 
-		auth_token = super(LogInController,self).encode_auth_token(user["id"])
+		auth_token = BaseController.encode_auth_token(user["id"])
 		user["auth_token"] = auth_token
-		return super(LogInController,self).success_response({"user":user})
+		return BaseController.success_response({"user":user})
 
 	def get_password_for_user(self,username):
 		sql = 'SELECT password FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
 		params = (username,)
 		res = db_query_select(sql,params)
 		if len(res) == 0:
-			return super(LogInController,self).error_response(Status.MISSING_PARAMETERS)
+			return BaseController.error_response(Status.MISSING_PARAMETERS)
 		user = res[0]
 		return user["password"]
 
@@ -51,5 +51,5 @@ class LogInController(BaseController):
 		algorithm = parts[0]
 		salt = parts[1]
 		password_hash = parts[2]
-		new_password_hash = super(LogInController,self).getSaltedPassword(algorithm,salt,password)
+		new_password_hash = super(LogInController,self).get_salted_password(algorithm,salt,password)
 		return new_password_hash == password_hash

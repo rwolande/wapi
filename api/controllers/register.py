@@ -29,7 +29,7 @@ class RegisterController(BaseController):
 		sql = 'INSERT INTO' + constants.USER_TABLE + "(username,password,role) VALUES (\'" + username + "\',\'" + final_password + "\',\'"  + role + "\')"
 		result_id = db_query_insert(sql)
 		if result_id is None:
-			return super(RegisterController,self).error_response(Status.REGISTRATION_FAILED)
+			return BaseController.error_response(Status.REGISTRATION_FAILED)
 
 		sql = 'SELECT id,username,role FROM' + constants.USER_TABLE + 'WHERE id=%s LIMIT 1'
 
@@ -43,4 +43,4 @@ class RegisterController(BaseController):
 		user = res[0]
 		auth_token = super(RegisterController,self).encode_auth_token(user["id"])
 		user["auth_token"] = auth_token
-		return super(RegisterController,self).success_response({"user":user})
+		return BaseController.success_response({"user":user})

@@ -14,10 +14,12 @@ class BaseController(Resource):
 
 		self.app = current_app
 
+	@staticmethod
 	def success_response(self, params={}):
 		params['status'] = Status.SUCCESS.code
 		return jsonify(params)
 
+	@staticmethod
 	def error_response(self, error_status, params={}):
 		params['status'] = error_status.code
 		params['message'] = error_status.message

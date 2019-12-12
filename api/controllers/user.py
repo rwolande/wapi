@@ -30,6 +30,6 @@ class UserController(BaseController):
 		params = (username,role,user_id)
 		result_id = db_query_update(sql,params)
 		if result_id is None:
-			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
+			return BaseController.error_response(Status.MISSING_PARAMETERS)
 		
 		return super(UserController,self).get_all_users()
