@@ -28,7 +28,7 @@ app.mysql = MySQL(app)
 app.api.add_resource(RegisterController, '/register') #POST to create a user
 app.api.add_resource(LogInController, '/login') #POST to Log In
 app.api.add_resource(UserController, '/user/<int:user_id>') #PUT, DELETE
-app.api.add_resource(UsersController, '/users') #POST new user, GET all users
+app.api.add_resource(UsersController, '/users') #GET all users
 app.api.add_resource(TripController, '/trip/<int:trip_id>') #PUT, DELETE
 app.api.add_resource(TripsController, '/trips') #POST new trip, GET all trips for a body's user_id
 
