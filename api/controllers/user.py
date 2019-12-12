@@ -25,7 +25,7 @@ class UserController(BaseController):
 		users = db_query_select(sql,params)
 		return super(UserController,self).success_response({"users":users})
 
-	def put(self, *args, **kwargs):
+	def put(self, user_id, *args, **kwargs):
 		username = g.username
 		role = g.role
 

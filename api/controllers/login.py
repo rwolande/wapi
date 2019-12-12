@@ -25,7 +25,7 @@ class LogInController(BaseController):
 		if not self.comparePasswords(password,hashed_password):
 			return super(LogInController,self).error_response(Status.BAD_PASSWORD)
 
-		sql = 'SELECT id,username,role,password FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
+		sql = 'SELECT id,username,role FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
 		params = (username,)
 		res = db_query_select(sql,params)
 		if len(res) == 0:
