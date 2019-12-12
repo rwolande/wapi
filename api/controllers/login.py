@@ -23,7 +23,7 @@ class LogInController(BaseController):
 
 		hashed_password = self.getPasswordForUser(username)
 		if not self.comparePasswords(password,hashed_password):
-			return super(UserController,self).error_response(Status.BAD_PASSWORD)
+			return super(LogInController,self).error_response(Status.BAD_PASSWORD)
 
 		sql = 'SELECT id,username,role,password FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
 		params = (username,)
@@ -39,7 +39,7 @@ class LogInController(BaseController):
 		params = (username,)
 		res = db_query_select(sql,params)
 		if len(res) == 0:
-			return super(UserController,self).error_response(Status.MISSING_PARAMETERS)
+			return super(LogInController,self).error_response(Status.MISSING_PARAMETERS)
 		user = res[0]
 		return user["password"]
 
@@ -48,5 +48,5 @@ class LogInController(BaseController):
 		algorithm = parts[0]
 		salt = parts[1]
 		password_hash = parts[2]
-		new_password_hash = super(RegisterController,self).getSaltedPassword(algorithm,salt,password)
+		new_password_hash = super(LogInController,self).getSaltedPassword(algorithm,salt,password)
 		return new_password_hash == password_hash

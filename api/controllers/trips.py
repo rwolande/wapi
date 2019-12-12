@@ -17,7 +17,7 @@ class TripsController(BaseController):
 	def get(self, *args, **kwargs):
 
 		user_id = g.user_id
-		
+
 		sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE user_id=%s ORDER BY start_date ASC'
 		params = (user_id,)
 		trips = db_query_select(sql,params)
@@ -40,6 +40,6 @@ class TripsController(BaseController):
 
 			trips = db_query_select(sql,params)
 
-			return super(TripController,self).success_response({"trips":trips})
+			return super(TripsController,self).success_response({"trips":trips})
 
-		return super(TripController,self).error_response(Status.MISSING_PARAMETERS)
+		return super(TripsController,self).error_response(Status.MISSING_PARAMETERS)

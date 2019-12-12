@@ -13,7 +13,7 @@ class UsersController(BaseController):
 	def __init__(self):
 		super(BaseController, self)
 
-	def get(self, *args, **kwargs):
+	def get(self, user_id, *args, **kwargs):
 		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY id DESC'
 		users = db_query_select(sql)
-		return super(UserController,self).success_response({"users":users})
+		return super(UsersController,self).success_response({"users":users})
