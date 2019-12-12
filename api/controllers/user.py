@@ -65,7 +65,7 @@ class UserController(BaseController):
 
 		trips = db_query_delete(sql,params)
 
-		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY user_id ASC'
+		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY user_id DESC'
 		params = (user_id,)
 		users = db_query_select(sql,params)
 		return super(UserController,self).success_response({"users":users})
@@ -80,7 +80,7 @@ class UserController(BaseController):
 		params = (username,role,user_id)
 		result_id = db_query_update(sql,params)
 		if not result_id is None:
-			sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY user_id ASC'
+			sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY user_id DESC'
 			params = (user_id,)
 			users = db_query_select(sql,params)
 			return super(UserController,self).success_response({"users":users})
