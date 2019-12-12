@@ -64,10 +64,9 @@ class BaseController(Resource):
 
 	@staticmethod
 	def confirmAccessLevelAndUserId(level,user_id=None):
-		key = request.headers.get('JWT-Auth')
-		if key is None:
+		decoded_id = BaseController.decode_auth_token()
+		if decoded_id is None:
 			return None
-		decoded_id = BaseController.decode_auth_token(key)
 		if not user_id is None:
 			if not user_id == decoded_id:
 				return None
