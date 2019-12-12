@@ -14,9 +14,14 @@ class TripController(BaseController):
 		super(BaseController, self)
 
 	def delete(self, trip_id, *args, **kwargs):
+		sql = 'SELECT user_id' + constants.TRIP_TABLE + 'WHERE id=%s LIMIT 1'
+		params = (trip_id),
+		res = db_query_select(sql,params)
+		user_id = res[0]["user_id"]
+		
 		sql = 'DELETE FROM' + constants.TRIP_TABLE + 'WHERE id=%s'
 
-		params = (trip_id,user_id,)
+		params = (trip_id,)
 
 		trips = db_query_delete(sql,params)
 
