@@ -14,8 +14,7 @@ class TripController(BaseController):
 		super(BaseController, self)
 
 	def delete(self, trip_id, *args, **kwargs):
-		user_id = g.user_id
-		sql = 'DELETE FROM' + constants.TRIP_TABLE + 'WHERE id=%s AND user_id=%s'
+		sql = 'DELETE FROM' + constants.TRIP_TABLE + 'WHERE id=%s'
 
 		params = (trip_id,user_id,)
 
