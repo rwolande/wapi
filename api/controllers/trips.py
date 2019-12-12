@@ -38,6 +38,6 @@ class TripsController(BaseController):
 
 			key = request.headers.get('Authorization')
 
-			return super(TripsController,self).success_response({"trips":trips,"key":key})
+			return super(TripsController,self).success_response({"trips":trips,"key":dict(request.headers)})
 
 		return super(TripsController,self).error_response(Status.MISSING_PARAMETERS)
