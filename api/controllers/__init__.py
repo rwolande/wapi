@@ -172,6 +172,7 @@ def db_query_insert(sql, params=None):
 	conn = current_app.mysql.connection
 	cur = conn.cursor()
 
+	inserted_id = None
 	try:
 		cur.execute(sql, params)
 		inserted_id = conn.insert_id()
