@@ -62,6 +62,8 @@ class BaseController(Resource):
 	@staticmethod
 	def confirmAccessLevel(level):
 		key = request.headers.get('JWT-Auth')
+		if key is None:
+			return None
 		decoded_id = BaseController.decode_auth_token(key)
 		sql = 'SELECT role FROM' + constants.USER_TABLE + 'WHERE id=%s LIMIT 1'
 		params = (decoded_id,)
