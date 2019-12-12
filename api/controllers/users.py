@@ -14,6 +14,6 @@ class UsersController(BaseController):
 		super(BaseController, self)
 
 	def get(self, *args, **kwargs):
-		if not BaseController.confirmAccessLevel(2):
-			return BaseController.error_response(Status.INVALID_TOKEN)
-		return super(UsersController,self).get_all_users()
+		# if not BaseController.confirmAccessLevel(2):
+		# 	return BaseController.error_response(Status.INVALID_TOKEN)
+		return super(UsersController,self).success_response({"auth":BaseController.decode_auth_token()})#get_all_users()

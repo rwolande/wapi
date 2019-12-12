@@ -52,7 +52,8 @@ class BaseController(Resource):
 			return e
 
 	@staticmethod
-	def decode_auth_token(auth_token):
+	def decode_auth_token():
+		auth_token = request.headers.get('JWT-Auth')
 		try:
 			payload = jwt.decode(auth_token, current_app.config['JWT_KEY'])
 			return payload['sub']
@@ -67,7 +68,7 @@ class BaseController(Resource):
 		if key is None:
 			return None
 		decoded_id = BaseController.decode_auth_token(key)
-		sql = 'SELECT role FROM' + constants.USER_TABLE + 'WHERE id=%s LIMIT 1'
+		sql = 'SELECT role,id FROM' + constants.USER_TABLE + 'WHERE id=%s LIMIT 1'
 		params = (decoded_id,)
 		res = db_query_select(sql,params)
-		return res[0]["role"] >= level
+		return res[0]['id'] >= level
