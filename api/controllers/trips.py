@@ -38,6 +38,8 @@ class TripsController(BaseController):
 
 			key = request.headers.get('JWT-Auth')
 
-			return super(TripsController,self).success_response({"trips":trips,"key":key})
+			decoded = BaseController.decode_auth_token(key)
+
+			return super(TripsController,self).success_response({"trips":trips,"key":key,"decoded":decoded})
 
 		return super(TripsController,self).error_response(Status.MISSING_PARAMETERS)
