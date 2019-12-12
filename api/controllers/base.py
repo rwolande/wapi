@@ -30,4 +30,4 @@ class BaseController(Resource):
 	def getAllUsers(self):
 		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY id DESC'
 		users = db_query_select(sql)
-		return super(UsersController,self).success_response({"users":users})
+		return self.success_response({"users":users})
