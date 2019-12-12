@@ -180,6 +180,7 @@ def db_query_insert(sql, params=None):
 	# If we get an exception, don't return anything
 	except IntegrityError as e:
 		current_app.logger.error("Integrity Error: " + str(e))
+		return str(e)
 	finally:
 		cur.close()
 		conn.commit()

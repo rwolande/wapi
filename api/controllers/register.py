@@ -36,6 +36,8 @@ class RegisterController(BaseController):
 		params = (result_id,)
 
 		res = db_query_select(sql,params)
+		if isinstance(res, str):
+			return super(RegisterController,self).error_with_message(res)
 
 		if len(res) == 0:
 			return super(RegisterController,self).error_response(Status.MISSING_PARAMETERS)
