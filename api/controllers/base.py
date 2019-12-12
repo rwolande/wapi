@@ -58,3 +58,12 @@ class BaseController(Resource):
 			return 'Signature expired. Please log in again.'
 		except jwt.InvalidTokenError:
 			return 'Invalid token. Please log in again.'
+
+	@staticmethod
+	def confirmAccessLevel(level):
+		key = request.headers.get('JWT-Auth')
+		decoded_id = BaseController.decode_auth_token(key)
+		sql = 'SELECT role FROM' + constants.USER_TABLE + 'WHERE id=%s LIMIT 1'
+		params = (decoded_id,)
+		res = db_query_select(sql,params)
+		return res[0]["id"] >= level
