@@ -84,7 +84,3 @@ class UserController(BaseController):
 			params = (user_id,)
 			users = db_query_select(sql,params)
 			return super(UserController,self).success_response({"users":users})
-
-
-
-
