@@ -1,7 +1,5 @@
 import datetime, hashlib, uuid, jwt
 
-import app
-
 from flask import Flask, current_app, request, jsonify
 from flask_restful import Resource, Api, reqparse, HTTPException
 from flask_mysqldb import MySQL
@@ -45,7 +43,7 @@ class BaseController(Resource):
 			}
 			return jwt.encode(
 				payload,
-				app.config.get('JWT_KEY'),
+				current_app.config['JWT_KEY'],
 				algorithm='HS256'
 			)
 		except Exception as e:
