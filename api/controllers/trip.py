@@ -32,14 +32,19 @@ class TripController(BaseController):
 
 	def put(self, trip_id, *args, **kwargs):
 
-		user_id = g.user_id
 		destination = g.destination
 		start_date = g.start_date
 		end_date = g.end_date
 		comment = g.comment
 
-		sql = 'UPDATE' + constants.TRIP_TABLE + "SET destination=%s,start_date=%s,end_date=%s,comment=%s WHERE id=%s AND user_id=%s"
-		params = (destination,start_date,end_date,comment,trip_id,user_id,)
+		sql = 'SELECT user_id FROM' + constants.TRIP_TABLE + 'WHERE id=%s LIMIT 1'
+		params = (trip_id),
+		res = db_query_select(sql,params)
+		user_id = res[0]["user_id"]
+
+
+		sql = 'UPDATE' + constants.TRIP_TABLE + "SET destination=%s,start_date=%s,end_date=%s,comment=%s WHERE id=%s"
+		params = (destination,start_date,end_date,comment,trip_id,)
 		result_id = db_query_update(sql,params)
 		if not result_id is None:
 			sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE user_id=%s ORDER BY start_date ASC'
