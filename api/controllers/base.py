@@ -6,6 +6,7 @@ from flask_mysqldb import MySQL
 
 from api import constants
 from api.status_codes import Status
+from api.controllers import db_query_select
 
 class BaseController(Resource):
 
