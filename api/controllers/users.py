@@ -13,7 +13,7 @@ class UsersController(BaseController):
 		super(BaseController, self)
 
 	# @protected
-	def get(self, user_id, *args, **kwargs):
+	def get(self, *args, **kwargs):
 		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY user_id ASC'
 		users = db_query_select(sql)
 		return super(UsersController,self).success_response({"users":users})
