@@ -35,7 +35,6 @@ class UserController(BaseController):
 		user = res[0]
 		return super(UserController,self).success_response({"user":user})
 
-	@protected
 	def getPasswordForUser(self,username):
 		sql = 'SELECT password FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
 		params = (username,)
@@ -45,7 +44,6 @@ class UserController(BaseController):
 		user = res[0]
 		return user["password"]
 
-	@protected
 	def comparePasswords(self,password,full):
 
 		parts = full.split("$")
