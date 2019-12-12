@@ -48,5 +48,5 @@ class LogInController(BaseController):
 		algorithm = parts[0]
 		salt = parts[1]
 		password_hash = parts[2]
-		new_password_hash = super.getSaltedPassword(algorithm,salt,password)
+		new_password_hash = super(LogInController,self).getSaltedPassword(algorithm,salt,password)
 		return new_password_hash == password_hash
