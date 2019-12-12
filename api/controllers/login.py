@@ -33,7 +33,7 @@ class LogInController(BaseController):
 
 		user = res[0]
 
-		auth_token = BaseController.encode_auth_token(user["id"])
+		auth_token = super(LogInController,self).encode_auth_token(user["id"])
 		user["auth_token"] = auth_token
 		return BaseController.success_response({"user":user})
 
