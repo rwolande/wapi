@@ -1,7 +1,8 @@
 import hashlib, uuid
 
 from flask import Flask, current_app, request, jsonify
-from flask_restful import Resource
+from flask_restful import Resource, Api, reqparse, HTTPException
+from flask_mysqldb import MySQL
 
 from api.status_codes import Status
 
@@ -25,3 +26,8 @@ class BaseController(Resource):
 		m.update(salt + password)
 		password_hash = m.hexdigest()
 		return password_hash
+
+	def getAllUsers(self):
+		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY id DESC'
+		users = db_query_select(sql)
+		return super(UsersController,self).success_response({"users":users})

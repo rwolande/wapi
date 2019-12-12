@@ -14,6 +14,4 @@ class UsersController(BaseController):
 		super(BaseController, self)
 
 	def get(self, *args, **kwargs):
-		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY id DESC'
-		users = db_query_select(sql)
-		return super(UsersController,self).success_response({"users":users})
+		return super(UsersController,self).getAllUsers()
