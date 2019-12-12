@@ -6,7 +6,7 @@ from flask_mysqldb import MySQL
 from flask import g
 
 from api import constants
-from api.controllers.base import BaseControlle
+from api.controllers.base import BaseController
 from api.status_codes import Status
 from api.controllers import db_query_select, db_query_insert
 
