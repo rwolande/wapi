@@ -70,4 +70,4 @@ class BaseController(Resource):
 		sql = 'SELECT role FROM' + constants.USER_TABLE + 'WHERE id=%s LIMIT 1'
 		params = (decoded_id,)
 		res = db_query_select(sql,params)
-		return res[0]["id"] >= level
+		return res[0]["role"] >= level
