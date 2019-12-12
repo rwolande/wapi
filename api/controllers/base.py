@@ -36,15 +36,15 @@ class BaseController(Resource):
 
 	def encode_auth_token(self, user_id):
 		try:
-	        payload = {
-	            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=1800),
-	            'iat': datetime.datetime.utcnow(),
-	            'sub': user_id
-	        }
-	        return jwt.encode(
-	            payload,
-	            app.config.get('JWT_KEY'),
-	            algorithm='HS256'
-	        )
-	    except Exception as e:
-	        return e
+			payload = {
+				'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=1800),
+				'iat': datetime.datetime.utcnow(),
+				'sub': user_id
+			}
+			return jwt.encode(
+				payload,
+				app.config.get('JWT_KEY'),
+				algorithm='HS256'
+			)
+		except Exception as e:
+			return e
