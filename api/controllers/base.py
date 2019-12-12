@@ -35,11 +35,7 @@ class BaseController(Resource):
 		return self.success_response({"users":users})
 
 	def encode_auth_token(self, user_id):
-    """
-    Generates the Auth Token
-    :return: string
-    """
-	    try:
+		try:
 	        payload = {
 	            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=1800),
 	            'iat': datetime.datetime.utcnow(),
