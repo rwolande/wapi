@@ -44,14 +44,9 @@ class LogInController(BaseController):
 		return user["password"]
 
 	def comparePasswords(self,password,full):
-
 		parts = full.split("$")
 		algorithm = parts[0]
 		salt = parts[1]
 		password_hash = parts[2]
-
-		m = hashlib.new(algorithm)
-		m.update(salt + password)
-		new_password_hash = m.hexdigest()
-
+		new_password_hash = super(RegisterController,self).getSaltedPassword(algorithm,salt,password)
 		return new_password_hash == password_hash

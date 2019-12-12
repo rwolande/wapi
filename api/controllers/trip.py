@@ -13,29 +13,7 @@ class TripController(BaseController):
 	def __init__(self):
 		super(BaseController, self)
 
-	def post(self, *args, **kwargs):
-
-		user_id = g.user_id
-		destination = g.destination
-		start_date = g.start_date
-		end_date = g.end_date
-		comment = g.comment
-
-		sql = 'INSERT INTO' + constants.TRIP_TABLE + "(user_id,destination,start_date,end_date,comment) VALUES (\'" + user_id + "\',\'" + destination + "\',\'" + start_date + "\',\'" + end_date + "\',\'" + comment + "\')"
-		result_id = db_query_insert(sql)
-		if not result_id is None:
-			sql = 'SELECT * FROM' + constants.TRIP_TABLE + 'WHERE user_id=%s ORDER BY start_date ASC'
-
-			params = (user_id,)
-
-			trips = db_query_select(sql,params)
-
-			return super(TripController,self).success_response({"trips":trips})
-
-		return super(TripController,self).error_response(Status.MISSING_PARAMETERS)
-
-	def delete(self, *args, **kwargs):
-		trip_id = g.trip_id
+	def delete(self, trip_id, *args, **kwargs):
 		user_id = g.user_id
 		sql = 'DELETE FROM' + constants.TRIP_TABLE + 'WHERE id=%s AND user_id=%s'
 
@@ -48,10 +26,9 @@ class TripController(BaseController):
 		trips = db_query_select(sql,params)
 		return super(TripController,self).success_response({"trips":trips})
 
-	def put(self, *args, **kwargs):
+	def put(self, trip_id, *args, **kwargs):
 
 		user_id = g.user_id
-		trip_id = g.trip_id
 		destination = g.destination
 		start_date = g.start_date
 		end_date = g.end_date

@@ -17,3 +17,9 @@ class BaseController(Resource):
 		params['status'] = error_status.code
 		params['message'] = error_status.message
 		return jsonify(params)
+
+	def getSaltedPassword(self,algorithm,salt,password):
+		m = hashlib.new(algorithm)
+		m.update(salt + password)
+		password_hash = m.hexdigest()
+		return password_hash

@@ -13,11 +13,6 @@ class UserController(BaseController):
 	def __init__(self):
 		super(BaseController, self)
 
-	def get(self, user_id, *args, **kwargs):
-		sql = 'SELECT * FROM' + constants.USER_TABLE + 'ORDER BY id DESC'
-		users = db_query_select(sql)
-		return super(UserController,self).success_response({"users":users})
-
 	def delete(self, user_id, *args, **kwargs):
 		sql = 'DELETE FROM' + constants.USER_TABLE + 'WHERE id=%s'
 

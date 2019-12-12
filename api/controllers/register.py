@@ -23,10 +23,7 @@ class RegisterController(BaseController):
 
 		algorithm = 'sha512'  
 		salt = uuid.uuid4().hex 
-
-		m = hashlib.new(algorithm)
-		m.update(salt + password)
-		password_hash = m.hexdigest()
+		password_hash = super(RegisterController,self).getSaltedPassword(algorithm,salt,password)
 		final_password = "$".join([algorithm,salt,password_hash])
 
 		sql = 'INSERT INTO' + constants.USER_TABLE + "(username,password,role) VALUES (\'" + username + "\',\'" + final_password + "\',\'"  + role + "\')"
@@ -45,4 +42,3 @@ class RegisterController(BaseController):
 
 		user = res[0]
 		return super(RegisterController,self).success_response({"user":user})
-
