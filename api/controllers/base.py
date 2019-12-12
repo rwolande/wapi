@@ -39,7 +39,7 @@ class BaseController(Resource):
 	def encode_auth_token(self, user_id):
 		try:
 			payload = {
-				'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=1800),
+				'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1, seconds=1),
 				'iat': datetime.datetime.utcnow(),
 				'sub': user_id
 			}
@@ -63,12 +63,17 @@ class BaseController(Resource):
 			return 'Invalid token. Please log in again.'
 
 	@staticmethod
-	def confirmAccessLevel(level):
+	def confirmAccessLevelAndUserId(level,user_id=None):
 		key = request.headers.get('JWT-Auth')
 		if key is None:
 			return None
 		decoded_id = BaseController.decode_auth_token(key)
+		if not user_id is None:
+			if not user_id == decoded_id:
+				return None
 		sql = 'SELECT role,id FROM' + constants.USER_TABLE + 'WHERE id=%s LIMIT 1'
 		params = (decoded_id,)
 		res = db_query_select(sql,params)
-		return res[0]['id'] >= level
+		if len(res) == 0:
+			return None
+		return res[0]['role'] >= level

@@ -14,15 +14,19 @@ class UserController(BaseController):
 		super(BaseController, self)
 
 	def delete(self, user_id, *args, **kwargs):
+		if not BaseController.confirmAccessLevelAndUserId(1,user_id):
+			return BaseController.error_response(Status.INVALID_TOKEN)
 		sql = 'DELETE FROM' + constants.USER_TABLE + 'WHERE id=%s'
 
 		params = (user_id,)
 
 		trips = db_query_delete(sql,params)
 
-		return super(UserController,self).get_all_users()
+		return super(UsersController,self).get_all_users()
 
 	def put(self, user_id, *args, **kwargs):
+		if not BaseController.confirmAccessLevelAndUserId(1):
+			return BaseController.error_response(Status.INVALID_TOKEN)
 		username = g.username
 		role = g.role
 
@@ -32,4 +36,4 @@ class UserController(BaseController):
 		if result_id is None:
 			return BaseController.error_response(Status.MISSING_PARAMETERS)
 		
-		return super(UserController,self).get_all_users()
+		return super(UsersController,self).get_all_users()
