@@ -31,6 +31,10 @@ class RegisterController(BaseController):
 		if result_id is None:
 			return BaseController.error_response(Status.REGISTRATION_FAILED)
 
+		if isinstance(result_id, str):
+			return super(RegisterController,self).error_with_message(res)
+
+
 		sql = 'SELECT id,username,role FROM' + constants.USER_TABLE + 'WHERE id=%s LIMIT 1'
 
 		params = (result_id,)
