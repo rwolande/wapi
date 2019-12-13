@@ -22,7 +22,7 @@ class UserController(BaseController):
 
 		trips = db_query_delete(sql,params)
 
-		return super(UsersController,self).get_all_users()
+		return super(UserController,self).get_all_users()
 
 	def put(self, user_id, *args, **kwargs):
 		if not BaseController.confirmAccessLevelAndUserId(1):
@@ -36,4 +36,4 @@ class UserController(BaseController):
 		if result_id is None:
 			return BaseController.error_response(Status.MISSING_PARAMETERS)
 		
-		return super(UsersController,self).get_all_users()
+		return super(UserController,self).get_all_users()
