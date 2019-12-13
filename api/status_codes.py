@@ -10,8 +10,9 @@ class Status(Enum):
 	MISSING_PARAMETERS = (400, "Missing required parameters")
 
 	# Unknown
-	REGISTRATION_FAILED = (500, "Registration Failed")
-	BAD_PASSWORD = (501,"Bad Password")
+	REGISTRATION_FAILED = (422, "Registration Failed")
+	BAD_PASSWORD = (422,"Bad Password")
+	INVALID_USERNAME = (422,"Invalid Username")
 
 	# Unauthorized
 	INVALID_TOKEN	= (401, "Unauthorized.")

@@ -22,14 +22,16 @@ class LogInController(BaseController):
 		password = g.password
 
 		hashed_password = self.get_password_for_user(username)
+		if hashed_password is None:
+			return super(LogInController,self).error_response(Status.INVALID_USERNAME)
 		if not self.compare_passwords(password,hashed_password):
 			return BaseController.error_response(Status.BAD_PASSWORD)
 
 		sql = 'SELECT id,username,role FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
 		params = (username,)
 		res = db_query_select(sql,params)
-		if len(res) == 0:
-			return super(LogInController,self).error_response(Status.MISSING_PARAMETERS)
+		if len(res) == 0 or res is None:
+			return super(LogInController,self).error_response(Status.INVALID_USERNAME)
 
 		user = res[0]
 
@@ -41,8 +43,8 @@ class LogInController(BaseController):
 		sql = 'SELECT password FROM' + constants.USER_TABLE + 'WHERE username=%s LIMIT 1'
 		params = (username,)
 		res = db_query_select(sql,params)
-		if len(res) == 0:
-			return BaseController.error_response(Status.MISSING_PARAMETERS)
+		if len(res) == 0 or res is None:
+			return None
 		user = res[0]
 		return user["password"]
 
