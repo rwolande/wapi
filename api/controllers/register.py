@@ -32,7 +32,7 @@ class RegisterController(BaseController):
 			return BaseController.error_response(Status.REGISTRATION_FAILED)
 
 		if isinstance(result_id, str):
-			return super(RegisterController,self).error_with_message(res)
+			return super(RegisterController,self).error_with_message(result_id)
 
 
 		sql = 'SELECT id,username,role FROM' + constants.USER_TABLE + 'WHERE id=%s LIMIT 1'
